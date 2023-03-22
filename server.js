@@ -7,7 +7,7 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 
-let data = require('.data/data.json');
+let data = require('./data/weather.json');
 
 
 const app = express(); // ***** app === server
@@ -30,38 +30,31 @@ app.get('/', (request, response) => {
   response.status(200).send('Welcome to my server!');
 });
 
-
-
-
-app.get('/hello', (request, response) => {
-  console.log(request.query);
-  let userFirstName = request.query.firstName;
-  let userLastName = request.query.lastName;
-
-  response.status(200).send(`Hello ${userFirstName} ${userLastName}! Welcome to my server!`);
-});
-
-
-app.get('/pet', (request, response) => {
+//vvvvvvvvvvvvvvvvvvvv       trello 2/3
+//here
+app.get('/weather', (request, response, next) => {
+  // let searchQuery = request.query.searchQuery;
+  // let searchLat = request.query.searchLat;
+  // let searchLon = request.query.searchLon;
   try {
-    queriedSpecies = request.query.species;
-
-    let dataToGroom = data.find(pet => pet.species === queriedSpecies);
-    let dataToSend = new Pet(dataToGroom);)
-
-response.status(200).send(dataToSend);
+// request.query is url (mr. hamerly), compare console.log line 41 and 44
+console.log(request.query);
+    let { searchQuery, searchLat, searchLon } = request.query;
+    let dataToGroom = data.find(wtvr => wtvr.city_name === searchQuery);
+    console.log(dataToGroom);
+    let dataToSend = dataToGroom.data.map(weatherCond => new Forecast(weatherCond));
   
+    response.status(200).send(dataToSend);
   } catch (error) {
-  next(error);
-}
+    next(error);
+  }
 });
 
-// CLASS TO GROOM THE BULKY DATA
-
-class Pet {
-  constructor(petObj) {
-    this.name = petObj.name;
-    this.breed = petObj.breed;
+//vvvvvvvvvvvvvvvv    trello 2/5
+class Forecast {
+  constructor(data) {
+    this.date = data.valid_date;
+    this.description = data.weather.description;
   }
 }
 
@@ -75,3 +68,26 @@ app.get('*', (request, response) => {
 app.use((error, request, response, next) => {
   response.status(500).send(error.message);
 });
+
+//vvvvvvvvvvvvvvvvv teacher's code
+// });
+
+// app.get('/hello', (request, response) => {
+//   console.log(request.query);
+//   let userFirstName = request.query.firstName;
+//   let userLastName = request.query.lastName;
+
+//   response.status(200).send(`Hello ${userFirstName} ${userLastName}! Welcome to my server!`);
+// });
+//vvvvvvvvvvvvvvvvvv          trello 2/4
+// app.get('/weather', (request, response, next) => {
+//   try {
+//     let queriedCity = request.query.city;
+
+
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+// CLASS TO GROOM THE BULKY DATA

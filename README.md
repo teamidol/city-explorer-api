@@ -10,7 +10,7 @@
 Server side
 
 ## Getting Started
-npm init, touch server.js, npm install express, npm install -g nodemon, npm install dotenv
+npm init, touch server.js, npm install express, npm install -g nodemon, npm install dotenv, npm install cors
 
 
 ## Architecture
