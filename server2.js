@@ -17,9 +17,7 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3002;
 
-// async function getPhotos (request, response, next) {
-//   (move try let keywordFromFrontEnd function here)
-// }
+
 
 
 
