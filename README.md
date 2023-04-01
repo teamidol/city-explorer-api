@@ -3,7 +3,7 @@ move on from previous labs
 
 # City Explorer API
 
-**Author**: laurence
+**Author**: Laurence
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
@@ -35,7 +35,6 @@ Start time: _____
 Finish time: _____
 
 Actual time needed to complete: _____
-
 
 ![flow chart](img/flow-chart.png)
 
