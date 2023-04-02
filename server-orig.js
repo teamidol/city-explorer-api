@@ -8,7 +8,6 @@ require('dotenv').config();
 const cors = require('cors');
 const getWeather = require('./modules/weather.js');
 const getMovies = require('./modules/movies.js')
-const mongoose = require('mongoose');
 
 // let data = require('./data/weather.json'), not currently used (using API)
 
@@ -25,19 +24,8 @@ const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => console.log(`We are running on port ${PORT}`));
 
 
-mongoose.connect(process.env.DB_URL);
-
-
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, ''));
-db.once('open', function () {
-  console.log('Mongoose is connected');
-});
 // Endpoints
-app.get('/', (request, response) =>{
-  response.status(200).send('Welcome!');
- });
+
 // Base endpoint - proof of life
 // 1st arg - string url in quotes
 // 2nd arg - callback that will execute when that endpoint is hit
